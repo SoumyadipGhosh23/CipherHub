@@ -7,9 +7,11 @@ import { MessageComposer } from './MessageComposer';
 import { FlowVisualizer } from './FlowVisualizer';
 import { ServerConsole } from './ServerConsole';
 import { Shield } from 'lucide-react';
+import { AlgorithmSelector } from './AlgorithmSelector';
 
 export function CipherLab() {
   const [selectedModel, setSelectedModel] = useState<SecurityModel>('plain-text');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>('AES-256-CBC');
   const [flowSteps, setFlowSteps] = useState<FlowStep[]>([]);
   const [serverLogs, setServerLogs] = useState<ServerLog[]>([]);
   const [isSending, setIsSending] = useState(false);
@@ -21,9 +23,51 @@ export function CipherLab() {
     ]);
   };
 
-  const handleSend = (message: string) => {
+  const handleSend = async (message: string) => {
     setIsSending(true);
     setFlowSteps([]);
+
+    if (selectedModel === 'backend-encryption') {
+      // Backend encryption flow
+      try {
+        appendLog('info', `CLIENT SENT: ${message}`);
+        const resp = await fetch('/api/backend-encryption', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, algorithm: selectedAlgorithm }),
+        });
+        const result = await resp.json();
+        const steps: FlowStep[] = [
+          { id: 'alice', label: 'Alice Browser', value: message, description: 'Message exists as plaintext in browser.' },
+          { id: 'network', label: 'Network Payload', value: message, description: 'Message travels through network unencrypted before server-side encryption.' },
+          { id: 'server', label: 'Server Received', value: message, description: 'Server receives full readable plaintext message.' },
+          { id: 'encryption', label: 'Server Encryption', value: result.encrypted, description: `Encrypting with ${result.algorithm}` },
+          { id: 'storage', label: 'Storage', value: result.encrypted, description: 'Only encrypted data is stored.' },
+        ];
+        let idx = 0;
+        const interval = setInterval(() => {
+          const step = steps[idx];
+          setFlowSteps(prev => [...prev, step]);
+          if (idx === 2) {
+            appendLog('info', `SERVER RECEIVED PLAIN TEXT: ${message}`);
+          }
+          if (idx === 3) {
+            appendLog('info', `SERVER ENCRYPTING USING ${result.algorithm}`);
+            appendLog('info', `GENERATED IV: ${result.iv}`);
+            appendLog('info', `STORED ENCRYPTED VALUE: ${result.encrypted}`);
+          }
+          idx++;
+          if (idx >= steps.length) {
+            clearInterval(interval);
+            setIsSending(false);
+          }
+        }, 700);
+      } catch (e) {
+        appendLog('error', 'Encryption failed');
+        setIsSending(false);
+      }
+      return;
+    }
 
     if (selectedModel !== 'plain-text') {
       appendLog('warning', `[${selectedModel.toUpperCase()}] mode is coming soon.`);
