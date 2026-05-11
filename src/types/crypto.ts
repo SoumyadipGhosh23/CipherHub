@@ -1,11 +1,25 @@
-export interface AlgorithmOption {
-  id: string; // e.g., 'AES-256-CBC'
-  name: string;
-  description: string;
+import { BackendEncryptionAlgorithmId } from '@/constants/algorithms';
+
+export interface SymmetricCiphertext {
+  algorithm: BackendEncryptionAlgorithmId;
+  encrypted: string;
+  iv: string;
+  authTag?: string;
+  decrypted?: string;
 }
 
-export interface EncryptionResult {
-  algorithm: string; // e.g., 'AES-256-CBC'
-  encrypted: string; // base64 ciphertext
-  iv: string; // base64 initialization vector
+export interface SymmetricEncryptInput {
+  algorithm: BackendEncryptionAlgorithmId;
+  message: string;
+}
+
+export interface SymmetricDecryptInput {
+  algorithm: BackendEncryptionAlgorithmId;
+  encrypted: string;
+  iv: string;
+  authTag?: string;
+}
+
+export interface BackendEncryptionStoredRecord extends SymmetricCiphertext {
+  storedAt: number;
 }

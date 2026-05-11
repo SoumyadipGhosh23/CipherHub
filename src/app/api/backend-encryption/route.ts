@@ -1,19 +1,32 @@
 import { NextResponse } from 'next/server';
-import { encryptMessage } from '@/services/backend-encryption.service';
-import { EncryptionResult } from '@/types/crypto';
+import { encryptBackendMessage } from '@/services/backend-encryption.service';
+import { BackendEncryptionAlgorithmId } from '@/constants/algorithms';
+
+export const runtime = 'nodejs';
+
+interface BackendEncryptionRequestBody {
+  message?: unknown;
+  algorithm?: unknown;
+}
 
 export async function POST(request: Request) {
   try {
-    const { message, algorithm } = await request.json();
+    const body: BackendEncryptionRequestBody = await request.json();
+    const { message, algorithm } = body;
+
     if (typeof message !== 'string' || typeof algorithm !== 'string') {
       return NextResponse.json({ error: 'Invalid request payload' }, { status: 400 });
     }
-    const result: EncryptionResult = await encryptMessage(message, algorithm);
-    // Simulate storage (in-memory, no DB)
-    // Return encryption result to client
+
+    const result = encryptBackendMessage({
+      message,
+      algorithm: algorithm as BackendEncryptionAlgorithmId,
+    });
+
     return NextResponse.json(result);
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Encryption failed';
     console.error('Backend encryption error:', error);
-    return NextResponse.json({ error: error.message || 'Encryption failed' }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

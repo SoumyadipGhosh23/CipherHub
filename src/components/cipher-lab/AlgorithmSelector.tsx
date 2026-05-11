@@ -1,28 +1,32 @@
 "use client";
 
-import { ENCRYPTION_ALGORITHMS } from '@/constants/algorithms';
+import { AlgorithmOption, BACKEND_ENCRYPTION_ALGORITHMS } from '@/constants/algorithms';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AlgorithmOption } from '@/types/crypto';
 
 export interface AlgorithmSelectorProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: AlgorithmOption['id'];
+  onChange: (value: AlgorithmOption['id']) => void;
 }
 
 export function AlgorithmSelector({ value, onChange }: AlgorithmSelectorProps) {
   return (
-    <div className="flex flex-col space-y-2 w-full max-w-xs mt-4">
-      <label className="text-sm font-medium text-zinc-400">Encryption Algorithm</label>
-      <Select value={value} onValueChange={onChange}>
+    <div className="flex w-full flex-col space-y-2">
+      <label className="text-sm font-medium text-zinc-400">Algorithm</label>
+      <Select value={value} onValueChange={(nextValue) => onChange(nextValue as AlgorithmOption['id'])}>
         <SelectTrigger className="w-full bg-zinc-900 border-zinc-800 text-zinc-100">
           <SelectValue placeholder="Select an algorithm" />
         </SelectTrigger>
         <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
-          {ENCRYPTION_ALGORITHMS.map((algo: AlgorithmOption) => (
+          {BACKEND_ENCRYPTION_ALGORITHMS.map((algo: AlgorithmOption) => (
             <SelectItem key={algo.id} value={algo.id} className="focus:bg-zinc-800 focus:text-zinc-100 cursor-pointer">
-              <div className="flex flex-col py-1">
-                <span className="font-medium text-sm">{algo.name}</span>
-                <span className="text-xs text-zinc-500 mt-0.5">{algo.description}</span>
+              <div className="flex flex-col gap-1 py-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-sm">{algo.name}</span>
+                  <span className="rounded-full border border-zinc-700 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-zinc-400">
+                    {algo.status}
+                  </span>
+                </div>
+                <span className="text-xs text-zinc-500">{algo.description}</span>
               </div>
             </SelectItem>
           ))}

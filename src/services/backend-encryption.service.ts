@@ -1,23 +1,54 @@
-import { encryptAES, EncryptionResult } from '@/lib/crypto/aes';
-import { AlgorithmOption } from '@/types/crypto';
-import { ENCRYPTION_ALGORITHMS } from '@/constants/algorithms';
+import {
+  BackendEncryptionStoredRecord,
+  SymmetricCiphertext,
+  SymmetricDecryptInput,
+  SymmetricEncryptInput,
+} from '@/types/crypto';
+import { decryptSymmetric, encryptSymmetric } from '@/lib/crypto/symmetric';
 
-/**
- * Service to handle backend encryption based on selected algorithm.
- * Currently supports only AES-256-CBC.
- */
-export async function encryptMessage(message: string, algorithmId: string): Promise<EncryptionResult> {
-  // Find algorithm definition (future use for validation).
-  const algo = ENCRYPTION_ALGORITHMS.find((a: AlgorithmOption) => a.id === algorithmId);
-  if (!algo) {
-    throw new Error(`Unsupported algorithm: ${algorithmId}`);
+let storedRecord: BackendEncryptionStoredRecord | null = null;
+
+export function encryptBackendMessage(
+  input: SymmetricEncryptInput,
+): BackendEncryptionStoredRecord {
+  const encrypted = encryptSymmetric(input);
+  storedRecord = {
+    ...encrypted,
+    storedAt: Date.now(),
+  };
+
+  return storedRecord;
+}
+
+export function decryptBackendMessage(input: SymmetricDecryptInput): SymmetricCiphertext {
+  const decrypted = decryptSymmetric(input);
+
+  return {
+    algorithm: input.algorithm,
+    encrypted: input.encrypted,
+    iv: input.iv,
+    authTag: input.authTag,
+    decrypted,
+  };
+}
+
+export function getStoredBackendMessage(): SymmetricDecryptInput | null {
+  if (!storedRecord) {
+    return null;
   }
 
-  // For now, only AES-256-CBC is implemented.
-  if (algorithmId === 'AES-256-CBC') {
-    return encryptAES(message);
-  }
+  return {
+    algorithm: storedRecord.algorithm,
+    encrypted: storedRecord.encrypted,
+    iv: storedRecord.iv,
+    authTag: storedRecord.authTag,
+  };
+}
 
-  // Placeholder for future algorithms.
-  throw new Error(`Algorithm ${algorithmId} not implemented yet`);
+export function getStoredBackendRecord(): BackendEncryptionStoredRecord | null {
+  return storedRecord;
+}
+
+export function clearStoredBackendMessage(): void {
+  storedRecord = null;
 }
