@@ -1,24 +1,39 @@
 "use client";
 
-import { AlgorithmOption, BACKEND_ENCRYPTION_ALGORITHMS } from '@/constants/algorithms';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-export interface AlgorithmSelectorProps {
-  value: AlgorithmOption['id'];
-  onChange: (value: AlgorithmOption['id']) => void;
+export interface AlgorithmSelectorOption<TValue extends string> {
+  id: TValue;
+  name: string;
+  description: string;
+  status: string;
 }
 
-export function AlgorithmSelector({ value, onChange }: AlgorithmSelectorProps) {
+export interface AlgorithmSelectorProps<TValue extends string> {
+  label: string;
+  value: TValue;
+  placeholder: string;
+  options: ReadonlyArray<AlgorithmSelectorOption<TValue>>;
+  onChange: (value: TValue) => void;
+}
+
+export function AlgorithmSelector<TValue extends string>({
+  label,
+  value,
+  placeholder,
+  options,
+  onChange,
+}: AlgorithmSelectorProps<TValue>) {
   return (
     <div className="flex w-full flex-col space-y-2">
-      <label className="text-sm font-medium text-zinc-400">Algorithm</label>
-      <Select value={value} onValueChange={(nextValue) => onChange(nextValue as AlgorithmOption['id'])}>
+      <label className="text-sm font-medium text-zinc-400">{label}</label>
+      <Select value={value} onValueChange={(nextValue) => onChange(nextValue as TValue)}>
         <SelectTrigger className="w-full bg-zinc-900 border-zinc-800 text-zinc-100">
-          <SelectValue placeholder="Select an algorithm" />
+          <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
-          {BACKEND_ENCRYPTION_ALGORITHMS.map((algo: AlgorithmOption) => (
-            <SelectItem key={algo.id} value={algo.id} className="focus:bg-zinc-800 focus:text-zinc-100 cursor-pointer">
+          {options.map((algo) => (
+            <SelectItem key={algo.id} value={algo.id} className="cursor-pointer focus:bg-zinc-800 focus:text-zinc-100">
               <div className="flex flex-col gap-1 py-1">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-sm">{algo.name}</span>
