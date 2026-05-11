@@ -28,10 +28,4 @@ export const HASHING_ALGORITHMS: HashingAlgorithmOption[] = [
     description: 'Slow password hashing algorithm designed for resistance to brute force.',
     status: 'Ready',
   },
-  {
-    id: 'Argon2',
-    name: 'Argon2',
-    description: 'Memory-hard password hashing algorithm. Educational / optional here.',
-    status: 'Educational / Coming Soon',
-  },
 ];

@@ -35,7 +35,7 @@ export const BACKEND_ENCRYPTION_ALGORITHMS: AlgorithmOption[] = [
   {
     id: 'Triple DES',
     name: 'Triple DES',
-    description: 'Legacy educational cipher. Kept for compatibility study.',
+    description: 'Legacy educational cipher.',
     status: 'Legacy',
   },
 ];

@@ -750,7 +750,7 @@ export function CipherLab() {
           </div>
           <div className="flex flex-col gap-1">
             <h1 className="text-3xl font-bold leading-none tracking-tight text-zinc-50">CipherLab</h1>
-            <p className="text-sm font-medium text-zinc-400">Interactive Encryption Visualizer</p>
+            <p className="text-sm font-heading font-medium text-zinc-400">Interactive Encryption Visualizer</p>
           </div>
         </header>
 

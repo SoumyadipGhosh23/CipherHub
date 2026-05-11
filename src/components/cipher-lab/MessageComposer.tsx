@@ -35,7 +35,7 @@ export function MessageComposer({
 
   return (
     <div className="flex flex-col space-y-2 w-full">
-      <label className="text-sm font-medium text-zinc-400">{label}</label>
+      <label className="text-sm font-heading font-medium text-zinc-400">{label}</label>
       <div className="flex flex-col sm:flex-row gap-3 items-stretch">
         <Textarea
           value={message}
@@ -57,7 +57,7 @@ export function MessageComposer({
         >
           <div className="flex flex-col items-center gap-1.5">
             {buttonIcon ?? <Send className="w-5 h-5" />}
-            <span className="font-medium tracking-wide">{buttonLabel}</span>
+            <span className="font-heading font-medium tracking-wide">{buttonLabel}</span>
           </div>
         </Button>
       </div>

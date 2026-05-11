@@ -18,7 +18,7 @@ interface SecurityModelSelectorProps {
 export function SecurityModelSelector({ value, onChange }: SecurityModelSelectorProps) {
   return (
     <div className="flex flex-col space-y-2 w-full max-w-xs">
-      <label className="text-sm font-medium text-zinc-400">Security Model</label>
+      <label className="text-sm font-heading font-medium text-zinc-400">Security Model</label>
       <Select value={value} onValueChange={(val) => onChange(val as SecurityModel)}>
         <SelectTrigger className="w-full bg-zinc-900 border-zinc-800 text-zinc-100">
           <SelectValue placeholder="Select a model" />
@@ -27,7 +27,7 @@ export function SecurityModelSelector({ value, onChange }: SecurityModelSelector
           {SECURITY_MODELS.map((model) => (
             <SelectItem key={model.id} value={model.id} className="focus:bg-zinc-800 focus:text-zinc-100 cursor-pointer">
               <div className="flex flex-col py-1">
-                <span className="font-medium text-sm">{model.name}</span>
+                <span className="font-heading font-medium text-sm">{model.name}</span>
                 <span className="text-xs text-zinc-500 mt-0.5">{model.description}</span>
               </div>
             </SelectItem>
