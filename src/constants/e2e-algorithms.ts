@@ -17,23 +17,5 @@ export const E2E_ENCRYPTION_ALGORITHMS: E2EAlgorithmOption[] = [
     name: 'AES-GCM',
     description: 'Browser-side authenticated encryption using Web Crypto API.',
     status: 'Ready',
-  },
-  {
-    id: 'Signal Protocol',
-    name: 'Signal Protocol',
-    description: 'Educational placeholder for a modern secure messaging protocol.',
-    status: 'Educational / Coming Soon',
-  },
-  {
-    id: 'Double Ratchet',
-    name: 'Double Ratchet',
-    description: 'Educational placeholder for per-message key advancement.',
-    status: 'Educational / Coming Soon',
-  },
-  {
-    id: 'X3DH Key Agreement',
-    name: 'X3DH Key Agreement',
-    description: 'Educational placeholder for secure shared-secret establishment.',
-    status: 'Educational / Coming Soon',
-  },
+  }
 ];

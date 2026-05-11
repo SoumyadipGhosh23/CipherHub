@@ -758,7 +758,7 @@ export function CipherLab() {
           <div className="flex flex-col space-y-6 xl:col-span-7">
             <div className="space-y-6 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md md:p-6">
               <div className="flex flex-col gap-6 sm:flex-row">
-                <div className="w-full shrink-0 space-y-4 sm:w-72">
+                <div className="w-full shrink-0 space-y-4 sm:w-80">
                   <SecurityModelSelector value={selectedModel} onChange={handleSecurityModelChange} />
 
                   {selectedModel === 'backend-encryption' ? (
