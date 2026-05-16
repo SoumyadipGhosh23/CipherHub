@@ -2212,6 +2212,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cipherhub@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "cipherhub@workspace:."
+  dependencies:
+    "@base-ui/react": "npm:^1.4.1"
+    "@tailwindcss/postcss": "npm:^4"
+    "@types/bcrypt": "npm:^6"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^19"
+    "@types/react-dom": "npm:^19"
+    bcrypt: "npm:^6.0.0"
+    class-variance-authority: "npm:^0.7.1"
+    clsx: "npm:^2.1.1"
+    eslint: "npm:^9"
+    eslint-config-next: "npm:16.2.5"
+    framer-motion: "npm:^12.38.0"
+    lucide-react: "npm:^1.14.0"
+    next: "npm:16.2.5"
+    react: "npm:19.2.4"
+    react-dom: "npm:19.2.4"
+    shadcn: "npm:^4.7.0"
+    tailwind-merge: "npm:^3.5.0"
+    tailwindcss: "npm:^4"
+    tw-animate-css: "npm:^1.4.0"
+    typescript: "npm:^5"
+  languageName: unknown
+  linkType: soft
+
 "class-variance-authority@npm:^0.7.1":
   version: 0.7.1
   resolution: "class-variance-authority@npm:0.7.1"
@@ -2408,34 +2436,6 @@ __metadata:
   checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce
   languageName: node
   linkType: hard
-
-"cypherhub@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "cypherhub@workspace:."
-  dependencies:
-    "@base-ui/react": "npm:^1.4.1"
-    "@tailwindcss/postcss": "npm:^4"
-    "@types/bcrypt": "npm:^6"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
-    bcrypt: "npm:^6.0.0"
-    class-variance-authority: "npm:^0.7.1"
-    clsx: "npm:^2.1.1"
-    eslint: "npm:^9"
-    eslint-config-next: "npm:16.2.5"
-    framer-motion: "npm:^12.38.0"
-    lucide-react: "npm:^1.14.0"
-    next: "npm:16.2.5"
-    react: "npm:19.2.4"
-    react-dom: "npm:19.2.4"
-    shadcn: "npm:^4.7.0"
-    tailwind-merge: "npm:^3.5.0"
-    tailwindcss: "npm:^4"
-    tw-animate-css: "npm:^1.4.0"
-    typescript: "npm:^5"
-  languageName: unknown
-  linkType: soft
 
 "damerau-levenshtein@npm:^1.0.8":
   version: 1.0.8
