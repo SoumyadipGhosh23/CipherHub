@@ -1,4 +1,4 @@
-import { SecurityModel } from '@/types/cipher-lab';
+import { SecurityModel } from '@/types/cipher-hub';
 
 export interface SecurityModelOption {
   id: SecurityModel;

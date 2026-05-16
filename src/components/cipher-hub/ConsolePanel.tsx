@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Terminal } from 'lucide-react';
-import { ServerLog } from '@/types/cipher-lab';
+import { ServerLog } from '@/types/cipher-hub';
 
 interface ConsolePanelProps {
   logs: ServerLog[];

@@ -1,7 +1,7 @@
-import { CipherLab } from "@/components/cipher-lab/CipherLab";
+import { CipherHub } from "@/components/cipher-hub/CipherHub";
 
 export const metadata = {
-  title: "CipherLab - Interactive Encryption Visualizer",
+  title: "CipherHub - Interactive Encryption Visualizer",
   description:
     "An interactive encryption and security visualization playground.",
 };
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main>
-      <CipherLab />
+      <CipherHub />
     </main>
   );
 }

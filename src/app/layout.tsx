@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CipherLab - Interactive Encryption Visualizer",
+  title: "CipherHub - Interactive Encryption Visualizer",
   description: "An interactive encryption and security visualization playground.",
 };
 

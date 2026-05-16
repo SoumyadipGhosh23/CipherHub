@@ -1,6 +1,6 @@
 "use client";
 
-import { SecurityModel } from '@/types/cipher-lab';
+import { SecurityModel } from '@/types/cipher-hub';
 import { SECURITY_MODELS } from '@/constants/security-models';
 import {
   Select,

@@ -1,6 +1,6 @@
 "use client";
 
-import { FlowStep } from "@/types/cipher-lab";
+import { FlowStep } from "@/types/cipher-hub";
 import { FlowNodeCard } from "./FlowNodeCard";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";

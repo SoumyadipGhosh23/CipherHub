@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 
-const DEMO_SECRET = Buffer.from('cipherlab-demo-backend-key-material-32bytes!');
+const DEMO_SECRET = Buffer.from('cipherhub-demo-backend-key-material-32bytes!');
 
 export function getKeyBytes(length: number): Buffer {
   if (length <= 0) {

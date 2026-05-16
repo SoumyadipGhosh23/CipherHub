@@ -11,7 +11,7 @@ import {
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { SecurityModel, FlowStep, ServerLog } from '@/types/cipher-lab';
+import { SecurityModel, FlowStep, ServerLog } from '@/types/cipher-hub';
 import {
   BackendEncryptionAlgorithmId,
   DEFAULT_BACKEND_ENCRYPTION_ALGORITHM,
@@ -74,7 +74,7 @@ interface TlsHandshakeResponse extends TlsHandshakeResult {
   sessionKey: string;
 }
 
-export function CipherLab() {
+export function CipherHub() {
   const [selectedModel, setSelectedModel] = useState<SecurityModel>('plain-text');
   const [backendAlgorithm, setBackendAlgorithm] = useState<BackendEncryptionAlgorithmId>(
     DEFAULT_BACKEND_ENCRYPTION_ALGORITHM,
@@ -749,7 +749,7 @@ export function CipherLab() {
             <Shield className="h-8 w-8 text-emerald-400" />
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="text-3xl font-bold leading-none tracking-tight text-zinc-50">CipherLab</h1>
+            <h1 className="text-3xl font-bold leading-none tracking-tight text-zinc-50">CipherHub</h1>
             <p className="text-sm font-heading font-medium text-zinc-400">Interactive Encryption Visualizer</p>
           </div>
         </header>

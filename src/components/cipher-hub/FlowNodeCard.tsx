@@ -7,7 +7,7 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import { FlowStep } from "@/types/cipher-lab";
+import { FlowStep } from "@/types/cipher-hub";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check, Copy } from "lucide-react";

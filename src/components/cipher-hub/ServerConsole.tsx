@@ -1,6 +1,6 @@
 "use client";
 
-import { ServerLog } from '@/types/cipher-lab';
+import { ServerLog } from '@/types/cipher-hub';
 import { ConsolePanel } from './ConsolePanel';
 
 interface ServerConsoleProps {
