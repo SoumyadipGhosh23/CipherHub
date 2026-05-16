@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CypherHub
 
-## Getting Started
+CypherHub is a small interactive crypto playground built with Next.js. It helps you see how things like plain text, hashing, backend encryption, end-to-end encryption, and TLS behave without reading a wall of theory first.
 
-First, run the development server:
+## What to look at first
+
+- `src/app/page.tsx` -> app entry
+- `src/components/cipher-lab/` -> main UI and interaction flow
+- `src/services/` -> crypto-related logic
+- `src/constants/` -> algorithm options and labels
+- `src/types/` -> shared TypeScript types
+
+## Run it
 
 ```bash
-npm run dev
-# or
+yarn
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to understand the project fast
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Start with `src/components/cipher-lab/CipherLab.tsx` because that is basically the whole experience.
+2. Follow the imported components to understand the UI pieces.
+3. Check `src/services/` and `src/lib/crypto/` when you want the actual crypto flow.
+4. Skim `src/constants/` if you want to know what algorithms and models the app supports.
 
-## Learn More
+## How to contribute
 
-To learn more about Next.js, take a look at the following resources:
+Keep it simple:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- reuse existing components, helpers, and patterns
+- keep UI in components and logic in services/lib
+- use `yarn`
+- stay strict with TypeScript
+- make small focused changes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you are new here, a great first contribution is improving one flow, one explanation, or one UI detail inside `cipher-lab`.
 
-## Deploy on Vercel
+## Adding more algorithms, types, or subtypes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here is the usual flow:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Add or update the type union first in `src/types/crypto.ts` or `src/types/cipher-lab.ts`.
+2. Add the visible option in the matching file inside `src/constants/`.
+3. Add the actual logic in `src/services/` or `src/lib/crypto/`.
+4. Wire it into `src/components/cipher-lab/CipherLab.tsx`.
+5. If needed, update the small UI selectors inside `src/components/cipher-lab/`.
+
+Quick examples:
+
+- new backend algorithm -> update `src/constants/algorithms.ts`, `src/types/crypto.ts`, and the backend encryption service
+- new hashing algorithm -> update `src/constants/hashing-algorithms.ts`, `src/types/crypto.ts`, and `src/services/hashing.service.ts`
+- new public key subtype -> update `src/constants/public-key-algorithms.ts`, `src/types/crypto.ts`, and the asymmetric flow used by `CipherLab`
+- new security model type -> add it in `src/constants/security-models.ts`, `src/types/cipher-lab.ts`, then add its flow/UI in `CipherLab`
+
+Rule of thumb: if users should be able to select it, it probably needs updates in `types`, `constants`, logic, and `CipherLab`.
