@@ -37,9 +37,6 @@ export function AlgorithmSelector<TValue extends string>({
               <div className="flex flex-col gap-1 py-1">
                 <div className="flex items-center gap-2">
                   <span className="font-heading font-medium text-sm">{algo.name}</span>
-                  <span className="rounded-full border border-zinc-700 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-zinc-400">
-                    {algo.status}
-                  </span>
                 </div>
                 <span className="text-xs text-zinc-500">{algo.description}</span>
               </div>
